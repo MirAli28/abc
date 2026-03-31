@@ -1,0 +1,16 @@
+{
+  "name": "vaajib",
+  "version": "1.0.0",
+  "description": "Do what actually matters - AI daily clarity app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "openai": "^4.28.0",
+    "dotenv": "^16.4.1",
+    "cors": "^2.8.5"
+  }
+}
