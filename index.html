@@ -1,1065 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vaajib – Do what actually matters</title>
-  <meta name="description" content="Get daily clarity and action steps to improve your life or make money." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Vaajib - Earn Money Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    /* ─── Reset & Base ──────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:        #f7f4f0;
-      --surface:   #ffffff;
-      --border:    #e8e2d9;
-      --primary:   #b07d5a;
-      --primary-d: #9a6b48;
-      --text:      #2b2520;
-      --muted:     #7a6e65;
-      --green:     #3a7d5a;
-      --green-bg:  #edf7f2;
-      --green-bdr: #b6ddc8;
-      --radius:    14px;
-      --shadow:    0 4px 24px rgba(0,0,0,0.07);
-    }
-
-    html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    /* ─── Utilities ─────────────────────────────────────── */
-    .hidden   { display: none !important; }
-    .fade-in  { animation: fadeIn 0.5s ease both; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.4; }
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-5px); }
-    }
-
-    /* ─── Buttons ───────────────────────────────────────── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: none;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 2px 12px rgba(176,125,90,0.3);
-    }
-    .btn-primary:hover { background: var(--primary-d); transform: translateY(-1px); box-shadow: 0 4px 18px rgba(176,125,90,0.35); }
-    .btn-primary:active { transform: translateY(0); }
-
-    .btn-outline {
-      background: #fff;
-      color: var(--text);
-      border: 2px solid var(--border);
-    }
-    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-
-    .btn-lg { padding: 18px 40px; font-size: 1.1rem; border-radius: 16px; }
-
-    .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
-
-    /* ─── Cards ─────────────────────────────────────────── */
-    .card {
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    /* ─── Form Elements ─────────────────────────────────── */
-    textarea, input[type="text"], input[type="number"] {
-      width: 100%;
-      font-family: inherit;
-      font-size: 0.97rem;
-      padding: 14px 16px;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      background: #fff;
-      color: var(--text);
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
-      resize: none;
-    }
-    textarea:focus, input[type="text"]:focus, input[type="number"]:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(176,125,90,0.12);
-    }
-    textarea { min-height: 130px; }
-    ::placeholder { color: var(--muted); }
-
-    /* ─── Labels ────────────────────────────────────────── */
-    label { font-weight: 600; font-size: 0.92rem; color: var(--text); display: block; margin-bottom: 8px; }
-    .label-hint { font-weight: 400; color: var(--muted); font-size: 0.85rem; margin-left: 6px; }
-
-    /* ─── Spinner ───────────────────────────────────────── */
-    .spinner {
-      width: 20px; height: 20px;
-      border: 2.5px solid rgba(255,255,255,0.4);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      flex-shrink: 0;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       VIEWS
-    ══════════════════════════════════════════════════════ */
-
-    .view { width: 100%; min-height: 100vh; }
-
-    /* ─── LANDING ───────────────────────────────────────── */
-    #view-landing {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #view-landing::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(176,125,90,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(176,125,90,0.07) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .landing-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: 999px;
-      border: 1.5px solid rgba(176,125,90,0.3);
-      background: rgba(176,125,90,0.07);
-      color: var(--primary);
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 28px;
-    }
-
-    .badge-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--primary);
-      animation: pulse 2s infinite;
-    }
-
-    .landing-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(2.4rem, 6vw, 4.5rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      max-width: 700px;
-      margin-bottom: 20px;
-    }
-
-    .landing-title em {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .landing-sub {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto 44px;
-      line-height: 1.7;
-    }
-
-    .btn-arrow::after { content: " →"; }
-
-    /* ─── FORM ──────────────────────────────────────────── */
-    #view-form {
-      padding: 48px 24px 80px;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .back-btn {
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-family: inherit;
-      font-size: 0.92rem;
-      font-weight: 500;
-      cursor: pointer;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
       padding: 0;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 32px;
-      transition: color 0.2s;
+      text-align: center;
     }
-    .back-btn:hover { color: var(--text); }
 
-    .form-title { font-size: 2rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.02em; }
-    .form-sub   { color: var(--muted); margin-bottom: 36px; }
-
-    .form-section { margin-bottom: 36px; }
-
-    /* Goal Cards */
-    .goal-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 12px;
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
     }
-    @media (max-width: 520px) { .goal-grid { grid-template-columns: 1fr; } }
 
-    .goal-card {
-      padding: 18px 16px;
-      border-radius: var(--radius);
-      border: 2px solid var(--border);
-      background: #fff;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.2s;
-      font-family: inherit;
-    }
-    .goal-card:hover { border-color: var(--primary); background: rgba(176,125,90,0.04); }
-    .goal-card.selected {
-      border-color: var(--primary);
-      background: rgba(176,125,90,0.06);
-      box-shadow: 0 0 0 3px rgba(176,125,90,0.12);
-    }
-    .goal-icon {
-      font-size: 1.4rem;
+    h1 {
+      font-size: 26px;
       margin-bottom: 10px;
     }
-    .goal-name { font-weight: 700; font-size: 0.95rem; color: var(--text); }
-    .goal-desc { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
 
-    /* Hours Slider */
-    .hours-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 12px;
-    }
-    .hours-value {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.02em;
-    }
-
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 6px;
-      border-radius: 99px;
-      background: var(--border);
-      outline: none;
-      cursor: pointer;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #fff;
-      border: 2.5px solid var(--primary);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
-    .range-labels { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); margin-top: 6px; padding: 0 2px; }
-
-    /* ─── RESULTS ───────────────────────────────────────── */
-    #view-results {
-      padding: 48px 24px 80px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .results-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 36px;
-    }
-
-    .results-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
-    .results-sub   { color: var(--muted); margin-top: 4px; }
-    .results-sub span { font-weight: 600; color: var(--text); }
-
-    .results-grid {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 28px;
-      align-items: start;
-    }
-    @media (max-width: 860px) { .results-grid { grid-template-columns: 1fr; } }
-
-    /* Progress Bar */
-    .progress-bar-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 18px;
-      border-radius: var(--radius);
-      background: #fff;
-      border: 1.5px solid var(--border);
+    .subtext {
+      color: #666;
       margin-bottom: 20px;
     }
-    .progress-label { font-size: 0.85rem; font-weight: 600; color: var(--muted); white-space: nowrap; }
-    .progress-track {
-      flex: 1;
-      height: 7px;
-      border-radius: 99px;
-      background: var(--border);
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      border-radius: 99px;
-      background: var(--primary);
-      transition: width 0.5s ease;
-    }
-    .progress-pct { font-size: 0.85rem; font-weight: 700; color: var(--text); min-width: 32px; text-align: right; }
 
-    /* Task Cards */
-    .task-card {
+    .card {
+      background: white;
       padding: 20px;
-      border-radius: var(--radius);
-      background: #fff;
-      border: 1.5px solid var(--border);
-      box-shadow: var(--shadow);
-      display: flex;
-      gap: 16px;
-      margin-bottom: 14px;
-      transition: all 0.25s;
-    }
-    .task-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.09); border-color: rgba(176,125,90,0.3); }
-    .task-card.done {
-      background: rgba(176,125,90,0.04);
-      border-color: transparent;
-      box-shadow: none;
-      opacity: 0.7;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    /* Custom Checkbox */
-    .check-wrap {
-      flex-shrink: 0;
-      padding-top: 3px;
-    }
-    .check-box {
-      width: 22px; height: 22px;
-      border-radius: 7px;
-      border: 2px solid var(--border);
-      background: #fff;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      flex-shrink: 0;
-    }
-    .check-box.checked {
-      background: var(--primary);
-      border-color: var(--primary);
-    }
-    .check-box .checkmark {
-      color: #fff;
-      font-size: 13px;
-      opacity: 0;
-      transition: opacity 0.15s;
-    }
-    .check-box.checked .checkmark { opacity: 1; }
-
-    .task-body { flex: 1; min-width: 0; }
-    .task-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 6px; }
-    .task-title {
-      font-weight: 700;
-      font-size: 1.02rem;
-      color: var(--text);
-      transition: all 0.2s;
-    }
-    .task-card.done .task-title { text-decoration: line-through; color: var(--muted); }
-    .task-time {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--muted);
-      background: var(--bg);
-      padding: 4px 10px;
-      border-radius: 8px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .task-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-
-    /* All Done Banner */
-    #all-done {
-      padding: 28px;
-      border-radius: var(--radius);
-      background: var(--green-bg);
-      border: 1.5px solid var(--green-bdr);
-      text-align: center;
-      margin-top: 8px;
-    }
-    .all-done-icon { font-size: 2.5rem; margin-bottom: 10px; }
-    .all-done-title { font-size: 1.3rem; font-weight: 800; color: var(--green); }
-    .all-done-sub   { font-size: 0.9rem; color: #5a8c70; margin-top: 4px; }
-
-    /* Strategy Card */
-    .strategy-card {
-      padding: 24px;
-      border-radius: var(--radius);
-      background: linear-gradient(135deg, #fff 0%, rgba(176,125,90,0.04) 100%);
-      border: 1.5px solid var(--border);
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
-    }
-    .strategy-card h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 1.5px solid var(--border);
-    }
-    .strategy-text { font-size: 0.93rem; color: var(--muted); line-height: 1.75; }
-
-    /* ─── CHAT ──────────────────────────────────────────── */
-    .chat-card {
-      border-radius: var(--radius);
-      background: #fff;
-      border: 1.5px solid var(--border);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      height: 460px;
-      overflow: hidden;
+    .badge {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 5px;
+      margin-bottom: 10px;
     }
 
-    .chat-header {
-      padding: 14px 18px;
-      border-bottom: 1.5px solid var(--border);
-      background: rgba(247,244,240,0.6);
-    }
-    .chat-header h3 { font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-    .chat-header p  { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
-
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .chat-empty {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      text-align: center;
-      gap: 8px;
-      opacity: 0.6;
-      font-size: 0.9rem;
-    }
-    .chat-empty .bot-icon { font-size: 2rem; }
-    .chat-empty .hint { font-size: 0.8rem; max-width: 220px; line-height: 1.5; }
-
-    .msg-row {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      animation: fadeIn 0.3s ease;
-    }
-    .msg-row.user { flex-direction: row-reverse; }
-
-    .msg-avatar {
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      flex-shrink: 0;
-    }
-    .msg-avatar.ai   { background: rgba(176,125,90,0.12); color: var(--primary); }
-    .msg-avatar.user { background: var(--border); color: var(--muted); }
-
-    .msg-bubble {
-      max-width: 82%;
-      padding: 10px 14px;
-      border-radius: 16px;
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
-    .msg-bubble.ai   { background: #fff; border: 1.5px solid var(--border); border-radius: 4px 16px 16px 16px; }
-    .msg-bubble.user { background: var(--text); color: #fff; border-radius: 16px 4px 16px 16px; }
-
-    .typing-dots {
-      display: flex;
-      gap: 5px;
-      padding: 12px 16px;
-    }
-    .typing-dots span {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--primary);
-      animation: bounce 1s infinite;
-    }
-    .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
-    .typing-dots span:nth-child(3) { animation-delay: 0.30s; }
-
-    .chat-form {
+    .btn {
+      display: block;
+      margin-top: 15px;
       padding: 12px;
-      border-top: 1.5px solid var(--border);
-      background: rgba(247,244,240,0.5);
-      display: flex;
-      gap: 8px;
+      background: #0070f3;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
     }
-    .chat-input {
-      flex: 1;
-      padding: 10px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      background: #fff;
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.2s;
+
+    .btn:hover {
+      background: #005ad3;
     }
-    .chat-input:focus { border-color: var(--primary); }
-    .chat-send {
-      width: 42px; height: 42px;
-      border-radius: 12px;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      transition: all 0.2s;
-      flex-shrink: 0;
+
+    .proof {
+      font-size: 13px;
+      color: #444;
+      margin-top: 10px;
     }
-    .chat-send:hover { background: var(--primary-d); transform: translateY(-1px); }
-    .chat-send:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .footer {
+      font-size: 12px;
+      color: #777;
+      margin-top: 25px;
+    }
   </style>
 </head>
 
 <body>
 
-  <div style="padding: 10px 0; text-align: center;">
-    <img src="vaajib.png" alt="vaajib logo" style="height:120px;">
+<div class="container">
+
+  <h1>💰 2 Simple Ways to Earn Money Online</h1>
+  <p class="subtext">🔥 Trusted by 1,000+ users • No experience needed</p>
+
+  <!-- OPTION 1 -->
+  <div class="card">
+    <div class="badge">BEST FOR BEGINNERS</div>
+    <h2>Get Paid for Reviewing Products</h2>
+    <p>Earn ₹500–₹3000/day by testing simple products online.</p>
+
+    <a href="https://google.com" class="btn">
+      Start Reviewing →
+    </a>
+
+    <div class="proof">✔ 237 people joined today</div>
   </div>
 
-  <!-- =========================
-       LANDING VIEW
-  ========================= -->
+  <!-- OPTION 2 -->
+  <div class="card">
+    <div class="badge">PASSIVE INCOME</div>
+    <h2>Earn Money from Your Phone</h2>
+    <p>Install an app and get paid for sharing anonymous data.</p>
 
-  <!-- ══════════════════════════════════════════
-       LANDING VIEW
-  ══════════════════════════════════════════ -->
-  <div id="view-landing" class="view fade-in">
-    <div class="landing-badge">
-      <span class="badge-dot"></span>
-      Daily Clarity
-    </div>
+    <a href="https://google.com" class="btn">
+      Get Started →
+    </a>
 
-    <h1 class="landing-title">
-      Do what <em>actually</em> matters.
-    </h1>
-
-    <p class="landing-sub">
-      Stop guessing. Tell us your goal, your available time, and your current situation.
-      We'll generate exactly what you need to do today.
-    </p>
-
-    <button class="btn btn-primary btn-lg btn-arrow" onclick="showView('form')">
-      Get Started
-    </button>
+    <div class="proof">✔ No work required</div>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       FORM VIEW
-  ══════════════════════════════════════════ -->
-  <div id="view-form" class="view hidden">
-    <button class="back-btn" onclick="showView('landing')">← Back</button>
-
-    <h2 class="form-title">Design your day</h2>
-    <p class="form-sub">Give us the context to build an actionable plan that fits your life.</p>
-
-    <form id="plan-form" onsubmit="submitForm(event)">
-
-      <!-- Goal -->
-      <div class="form-section">
-        <label>1. What is your primary focus right now?</label>
-        <div class="goal-grid">
-          <button type="button" class="goal-card" data-goal="Make Money" onclick="selectGoal(this)">
-            <div class="goal-icon">🎯</div>
-            <div class="goal-name">Make Money</div>
-            <div class="goal-desc">Increase income or start a business</div>
-          </button>
-          <button type="button" class="goal-card" data-goal="Get Job" onclick="selectGoal(this)">
-            <div class="goal-icon">💼</div>
-            <div class="goal-name">Get Job</div>
-            <div class="goal-desc">Find employment or advance career</div>
-          </button>
-          <button type="button" class="goal-card" data-goal="Improve Life" onclick="selectGoal(this)">
-            <div class="goal-icon">✨</div>
-            <div class="goal-name">Improve Life</div>
-            <div class="goal-desc">Health, habits, or personal growth</div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Hours -->
-      <div class="form-section">
-        <div class="hours-row">
-          <label style="margin:0">2. How many focused hours can you commit today?</label>
-          <span class="hours-value" id="hours-display">2 hours</span>
-        </div>
-        <input
-          type="range" id="hours-slider"
-          min="1" max="12" step="1" value="2"
-          oninput="updateHours(this.value)"
-          style="margin-top:10px;"
-        />
-        <div class="range-labels"><span>1h</span><span>12h</span></div>
-      </div>
-
-      <!-- Situation -->
-      <div class="form-section">
-        <label>
-          3. Describe your exact current situation.
-          <span class="label-hint">Be specific</span>
-        </label>
-        <textarea
-          id="situation-input"
-          placeholder="e.g., I have $500 in my bank account, a laptop, and I know basic graphic design. I need to make money this week to pay rent."
-          oninput="validateForm()"
-        ></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary" id="submit-btn" style="width:100%;" disabled>
-        Generate Daily Plan
-      </button>
-    </form>
+  <div class="footer">
+    Results may vary. This is not a get-rich-quick scheme.<br>
+    This site may contain affiliate links.
   </div>
 
-  <!-- ══════════════════════════════════════════
-       RESULTS VIEW
-  ══════════════════════════════════════════ -->
-  <div id="view-results" class="view hidden">
-
-    <div class="results-header">
-      <div>
-        <h2 class="results-title">Your Daily Protocol</h2>
-        <p class="results-sub">Execute these steps towards: <span id="goal-display"></span></p>
-      </div>
-      <button class="btn btn-outline" onclick="showView('landing'); resetAll();">
-        ↩ Start Over
-      </button>
-    </div>
-
-    <div class="results-grid">
-      <!-- Left: Tasks -->
-      <div>
-        <!-- Progress -->
-        <div class="progress-bar-wrap">
-          <span class="progress-label">Progress</span>
-          <div class="progress-track">
-            <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-          </div>
-          <span class="progress-pct" id="progress-pct">0%</span>
-        </div>
-
-        <!-- Task list -->
-        <div id="task-list"></div>
-
-        <!-- All done -->
-        <div id="all-done" class="hidden">
-          <div class="all-done-icon">✅</div>
-          <div class="all-done-title">Day Won.</div>
-          <div class="all-done-sub">You executed the plan. Rest up and come back tomorrow.</div>
-        </div>
-      </div>
-
-      <!-- Right: Strategy + Chat -->
-      <div>
-        <div class="strategy-card">
-          <h3>📋 The Strategy</h3>
-          <p class="strategy-text" id="action-plan-text"></p>
-        </div>
-
-        <!-- Chat -->
-        <div class="chat-card">
-          <div class="chat-header">
-            <h3>🤖 AI Execution Assistant</h3>
-            <p>Ask questions about your plan, how to execute tasks, or request alternatives.</p>
-          </div>
-
-          <div class="chat-messages" id="chat-messages">
-            <div class="chat-empty" id="chat-empty">
-              <div class="bot-icon">🤖</div>
-              <div>I'm ready to help you execute.</div>
-              <div class="hint">"How do I start task 1?" or "I don't have the tools for task 2"</div>
-            </div>
-          </div>
-
-          <form class="chat-form" onsubmit="sendChat(event)">
-            <input
-              class="chat-input"
-              id="chat-input"
-              type="text"
-              placeholder="Ask a question..."
-              autocomplete="off"
-            />
-            <button class="chat-send" type="submit" id="chat-send-btn" title="Send">
-              ➤
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       JAVASCRIPT
-  ══════════════════════════════════════════ -->
-  <script>
-    /* ── State ────────────────────────────────── */
-    let selectedGoal      = "";
-    let completedTasks    = new Set();
-    let chatHistory       = [];
-    let currentContext    = null;
-    let totalTasks        = 0;
-
-    /* ── View Navigation ──────────────────────── */
-    function showView(name) {
-      document.querySelectorAll(".view").forEach(v => v.classList.add("hidden"));
-      const el = document.getElementById("view-" + name);
-      el.classList.remove("hidden");
-      el.classList.remove("fade-in");
-      void el.offsetWidth; // reflow
-      el.classList.add("fade-in");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    /* ── Goal Selection ───────────────────────── */
-    function selectGoal(card) {
-      document.querySelectorAll(".goal-card").forEach(c => c.classList.remove("selected"));
-      card.classList.add("selected");
-      selectedGoal = card.dataset.goal;
-      validateForm();
-    }
-
-    /* ── Hours Slider ─────────────────────────── */
-    function updateHours(val) {
-      const n = parseInt(val);
-      document.getElementById("hours-display").textContent = n + (n === 1 ? " hour" : " hours");
-      updateSliderFill(val);
-    }
-
-    function updateSliderFill(val) {
-      const slider = document.getElementById("hours-slider");
-      const pct = ((val - slider.min) / (slider.max - slider.min)) * 100;
-      slider.style.background = `linear-gradient(to right, var(--primary) ${pct}%, var(--border) ${pct}%)`;
-    }
-    updateSliderFill(2);
-
-    /* ── Form Validation ──────────────────────── */
-    function validateForm() {
-      const situation = document.getElementById("situation-input").value.trim();
-      const valid = selectedGoal && situation.length > 10;
-      document.getElementById("submit-btn").disabled = !valid;
-    }
-
-    /* ── Form Submit ──────────────────────────── */
-    async function submitForm(e) {
-      e.preventDefault();
-
-      const hours     = parseInt(document.getElementById("hours-slider").value);
-      const situation = document.getElementById("situation-input").value.trim();
-      const btn       = document.getElementById("submit-btn");
-
-      btn.innerHTML = '<span class="spinner"></span> Drafting your plan...';
-      btn.disabled  = true;
-
-      try {
-        const res  = await fetch("/api/generate-plan", {
-          method:  "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ goal: selectedGoal, hoursPerDay: hours, currentSituation: situation })
-        });
-
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error || "Server error");
-        }
-
-        const data = await res.json();
-        currentContext = { goal: selectedGoal, hoursPerDay: hours, currentSituation: situation };
-
-        renderResults(data);
-        showView("results");
-
-      } catch (err) {
-        alert("Error: " + err.message);
-      } finally {
-        btn.innerHTML = "Generate Daily Plan";
-        btn.disabled  = false;
-      }
-    }
-
-    /* ── Render Results ───────────────────────── */
-    function renderResults(data) {
-      completedTasks.clear();
-      chatHistory    = [];
-      totalTasks     = data.tasks.length;
-
-      document.getElementById("goal-display").textContent     = selectedGoal;
-      document.getElementById("action-plan-text").textContent = data.actionPlan;
-      document.getElementById("all-done").classList.add("hidden");
-      document.getElementById("chat-empty").style.display     = "flex";
-      const msgs = document.getElementById("chat-messages");
-      // clear old messages
-      while (msgs.children.length > 1) msgs.removeChild(msgs.lastChild);
-
-      updateProgress();
-
-      const list = document.getElementById("task-list");
-      list.innerHTML = "";
-
-      data.tasks.forEach((task, i) => {
-        const card = document.createElement("div");
-        card.className = "task-card fade-in";
-        card.id = "task-" + task.id;
-        card.style.animationDelay = (i * 0.08) + "s";
-        card.innerHTML = `
-          <div class="check-wrap">
-            <div class="check-box" id="cb-${task.id}" onclick="toggleTask('${task.id}', this, document.getElementById('task-${task.id}'))">
-              <span class="checkmark">✓</span>
-            </div>
-          </div>
-          <div class="task-body">
-            <div class="task-header">
-              <div class="task-title">${escHtml(task.title)}</div>
-              <div class="task-time">⏱ ${escHtml(task.timeEstimate)}</div>
-            </div>
-            <div class="task-desc">${escHtml(task.description)}</div>
-          </div>`;
-        list.appendChild(card);
-      });
-    }
-
-    /* ── Toggle Task ──────────────────────────── */
-    function toggleTask(id, checkEl, cardEl) {
-      const done = !completedTasks.has(id);
-      if (done) {
-        completedTasks.add(id);
-        checkEl.classList.add("checked");
-        cardEl.classList.add("done");
-      } else {
-        completedTasks.delete(id);
-        checkEl.classList.remove("checked");
-        cardEl.classList.remove("done");
-      }
-      updateProgress();
-    }
-
-    function updateProgress() {
-      const pct = totalTasks ? Math.round((completedTasks.size / totalTasks) * 100) : 0;
-      document.getElementById("progress-fill").style.width = pct + "%";
-      document.getElementById("progress-pct").textContent  = pct + "%";
-      const allDone = completedTasks.size === totalTasks && totalTasks > 0;
-      document.getElementById("all-done").classList.toggle("hidden", !allDone);
-    }
-
-    /* ── Chat ─────────────────────────────────── */
-    async function sendChat(e) {
-      e.preventDefault();
-      const input   = document.getElementById("chat-input");
-      const sendBtn = document.getElementById("chat-send-btn");
-      const msg     = input.value.trim();
-      if (!msg) return;
-
-      // Hide empty state
-      document.getElementById("chat-empty").style.display = "none";
-
-      appendMessage("user", msg);
-      chatHistory.push({ role: "user", content: msg });
-      input.value   = "";
-      sendBtn.disabled = true;
-
-      // Typing indicator
-      const typing = appendTyping();
-
-      try {
-        const res = await fetch("/api/chat", {
-          method:  "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: msg, context: currentContext, history: chatHistory.slice(0, -1) })
-        });
-
-        if (!res.ok) throw new Error("Server error");
-        const data = await res.json();
-
-        typing.remove();
-        appendMessage("ai", data.reply);
-        chatHistory.push({ role: "assistant", content: data.reply });
-
-      } catch (err) {
-        typing.remove();
-        appendMessage("ai", "Sorry, I couldn't get a response. Please try again.");
-      } finally {
-        sendBtn.disabled = false;
-        input.focus();
-      }
-    }
-
-    function appendMessage(role, text) {
-      const msgs = document.getElementById("chat-messages");
-      const row  = document.createElement("div");
-      row.className = "msg-row " + role;
-      row.innerHTML = `
-        <div class="msg-avatar ${role}">${role === "ai" ? "🤖" : "👤"}</div>
-        <div class="msg-bubble ${role}">${escHtml(text)}</div>`;
-      msgs.appendChild(row);
-      msgs.scrollTop = msgs.scrollHeight;
-      return row;
-    }
-
-    function appendTyping() {
-      const msgs = document.getElementById("chat-messages");
-      const row  = document.createElement("div");
-      row.className = "msg-row ai";
-      row.innerHTML = `
-        <div class="msg-avatar ai">🤖</div>
-        <div class="msg-bubble ai" style="padding:0;">
-          <div class="typing-dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>`;
-      msgs.appendChild(row);
-      msgs.scrollTop = msgs.scrollHeight;
-      return row;
-    }
-
-    /* ── Reset ────────────────────────────────── */
-    function resetAll() {
-      selectedGoal   = "";
-      completedTasks = new Set();
-      chatHistory    = [];
-      currentContext = null;
-      document.querySelectorAll(".goal-card").forEach(c => c.classList.remove("selected"));
-      document.getElementById("situation-input").value = "";
-      document.getElementById("hours-slider").value    = "2";
-      updateHours(2);
-      document.getElementById("submit-btn").disabled = true;
-      document.getElementById("submit-btn").textContent = "Generate Daily Plan";
-    }
-
-    /* ── Helpers ──────────────────────────────── */
-    function escHtml(str) {
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-  </script></script>
-
-<!-- ✅ NEW PRICING SECTION STARTS HERE -->
-<div style="text-align:center; margin-top:40px;">
-  <h2>Pricing</h2>
-
-  <div style="border:1px solid #ccc; padding:20px; margin:10px;">
-    <h3>Free Plan</h3>
-    <p>5 free uses</p>
-    <p>₹0</p>
-  </div>
-
-  <div style="border:2px solid black; padding:20px; margin:10px;">
-    <h3>Pro Plan</h3>
-    <p><b>Most Popular</b></p> <!-- ⭐ THIS IS THE TAG -->
-    <p>Unlimited usage</p>
-    <p>₹199/month</p>
-
-    <button onclick="window.location.href='https://rzp.io/rzp/IC8flxrF'">
-      Upgrade Now
-    </button><p style="font-size: 12px; color: #777;">Secure checkout via card & PayPal</p>
-  </div>
-
-  <div style="border:2px solid gold; padding:20px; margin:10px;">
-    <h3>Business Plan</h3>
-    <p>Premium usage + priority support</p>
-    <p>₹999/month</p>
-
-    <button onclick="window.location.href='https://rzp.io/rzp/Abxy6rot'">
-      Get Business Plan
-    </button><p style="font-size: 12px; color: #777;">Secure checkout via card & PayPal</p>
-  </div>
 </div>
-<!-- ✅ NEW PRICING SECTION ENDS HERE -->
 
-</body>
-</html>
 </body>
 </html>
